@@ -3,6 +3,7 @@ global:
 
 components:
   load-generator:
+    replicas: 0
     enabled: true
     imageOverride:
       repository: ghcr.io/open-telemetry/demo
@@ -14,7 +15,6 @@ components:
       limits:
         cpu: 1200m
         memory: 4Gi
-    replicas: 0
 
   frontend:
     resources:

@@ -8,10 +8,7 @@ components:
 
   loadgenerator:
     enabled: true
-    image:
-      repository: ghcr.io/open-telemetry/opentelemetry-demo/loadgenerator
-      tag: 1.10.0 # 👈 Your clean, error-free working tag
-      pullPolicy: IfNotPresent
+    image: "ghcr.io/open-telemetry/opentelemetry-demo/loadgenerator:1.10.0"
     resources:
       requests:
         cpu: 550m

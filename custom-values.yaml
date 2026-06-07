@@ -14,6 +14,7 @@ components:
       limits:
         cpu: 1200m
         memory: 4Gi
+    replicas: 0
 
   frontend:
     resources:

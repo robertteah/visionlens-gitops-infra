@@ -4,18 +4,20 @@ global:
   environment: "local"
 
 # 👇 FIX: All individual microservices must live inside this components block
-components:
 
+components:
   loadgenerator:
     enabled: true
-    image: "ghcr.io/open-telemetry/demo:1.10.0-load-generator"
+    imageOverride:
+      repository: ghcr.io/open-telemetry/demo
+      tag: 1.10.0-load-generator
     resources:
       requests:
         cpu: 550m
         memory: 2Gi
       limits:
         cpu: 1200m
-        memory: 4Gi # 👈 Your OOMKilled fix memory bump
+        memory: 4Gi
 
   frontend:
     resources:

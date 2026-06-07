@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   destination:
-    server: https://default.svc
+    server: https://kubernetes.default.svc
     namespace: default
   sources:
     # Source 1: Pulls the official community OpenTelemetry application chart    

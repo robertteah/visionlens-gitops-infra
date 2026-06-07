@@ -3,8 +3,7 @@ global:
 
 components:
   load-generator:
-    replicas: 0
-    enabled: true
+    enabled: false
     imageOverride:
       repository: ghcr.io/open-telemetry/demo
       tag: latest-load-generator

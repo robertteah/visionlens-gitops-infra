@@ -6,7 +6,7 @@ components:
     enabled: true
     imageOverride:
       repository: ghcr.io/open-telemetry/demo
-      tag: 1.10.0-load-generator
+      tag: latest-load-generator
     resources:
       requests:
         cpu: 550m

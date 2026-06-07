@@ -1,52 +1,38 @@
 # custom-values.yaml
 
-# 1. Scale down components for local desktop use
 global:
   environment: "local"
 
-# 2. Reduce CPU and Memory limits for microservices so they do not overload RAM
-frontend:
-  resources:
-    limits:
-      memory: 128Mi
-    requests:
-      cpu: 50m
-      memory: 64Mi
+# 👇 FIX: All individual microservices must live inside this components block
+components:
 
-checkoutservice:
-  resources:
-    limits:
-      memory: 128Mi
-    requests:
-      cpu: 50m
-      memory: 64Mi
+  loadgenerator:
+    enabled: true
+    image:
+      repository: ghcr.io/open-telemetry/opentelemetry-demo/loadgenerator
+      tag: 1.10.0 # 👈 Your clean, error-free working tag
+      pullPolicy: IfNotPresent
+    resources:
+      requests:
+        cpu: 550m
+        memory: 2Gi
+      limits:
+        cpu: 1200m
+        memory: 4Gi # 👈 Your OOMKilled fix memory bump
 
-load-generator:
-  resources:
-    limits:
-      memory: 4Gi
-    requests:
-      cpu: 50m
-      memory: 2Gi
+  frontend:
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
 
-# 3. Disable the automated load generator to save system processing power
-load-generator:
-  enabled: false
-
-# 4. Fix the loadgenerator image issue
-loadgenerator:
-  enabled: true # Set to true if you want it to run, or false to keep it turned off
-  image:
-    repository: ghcr.io/open-telemetry/opentelemetry-demo/loadgenerator # 👈 The standard repo path
-    tag: latest # 👈 REPLACE THIS with your specific error-free image tag (e.g., 1.10.0, main, or a known stable version)
-    pullPolicy: IfNotPresent
-
-# 2. Your OOMKilled fix goes here:
-  resources:
-    requests:
-      cpu: 50m
-      memory: 2Gi
-    limits:
-      cpu: 200m
-      memory: 4Gi # 👈 INCREASE THIS (e.g., from 128Mi to 256Mi) to stop the OOMKilled crash!
+  checkoutservice:
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
 

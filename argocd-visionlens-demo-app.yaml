@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: opentelemetry-demo
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: https://default.svc
+    namespace: otel-demo
+  sources:
+    # Source 1: Pulls the official community OpenTelemetry application chart
+    - repoURL: 'https://github.io'
+      chart: opentelemetry-demo
+      targetRevision: 0.40.9
+    # Source 2: Pulls your custom lightweight settings from your precise GitHub repository
+    - repoURL: 'https://github.com/robertteah/visionlens-gitops-infra.git'
+      targetRevision: HEAD
+      helm:
+        valueFiles:
+          - '$values/apps/otel-demo/custom-values.yaml'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    # 👇 FIX: Moved createNamespace into the correct syncOptions block
+    syncOptions:
+      - CreateNamespace=true
+

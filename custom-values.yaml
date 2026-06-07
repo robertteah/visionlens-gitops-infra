@@ -21,7 +21,32 @@ checkoutservice:
       cpu: 50m
       memory: 64Mi
 
+load-generator:
+  resources:
+    limits:
+      memory: 4Gi
+    requests:
+      cpu: 50m
+      memory: 2Gi
+
 # 3. Disable the automated load generator to save system processing power
-loadgenerator:
+load-generator:
   enabled: false
+
+# 4. Fix the loadgenerator image issue
+loadgenerator:
+  enabled: true # Set to true if you want it to run, or false to keep it turned off
+  image:
+    repository: ghcr.io/open-telemetry/opentelemetry-demo/loadgenerator # 👈 The standard repo path
+    tag: latest # 👈 REPLACE THIS with your specific error-free image tag (e.g., 1.10.0, main, or a known stable version)
+    pullPolicy: IfNotPresent
+
+# 2. Your OOMKilled fix goes here:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 2Gi
+    limits:
+      cpu: 200m
+      memory: 4Gi # 👈 INCREASE THIS (e.g., from 128Mi to 256Mi) to stop the OOMKilled crash!
 

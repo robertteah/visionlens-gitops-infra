@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: opentelemetry-demo
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: https://default.svc
+    namespace: my-otel-demo # 👈 Deploys the demo into its own namespace
+  sources:
+    # Source 1: The official community Helm chart
+    - repoURL: 'https://open-telemetry.github.io/opentelemetry-helm-charts'
+      chart: opentelemetry-demo
+      targetRevision: 0.40.9 # 👈 Pin the version so it never updates unexpectedly
+    # Source 2: Your personal Git repo containing your custom tweaks
+    - repoURL: 'https://github.com/robertteah/my-gitops-infra.git'
+      targetRevision: HEAD
+      helm:
+        valueFiles:
+          - '$values/apps/,y-otel-demo/custom-values.yaml' # 👈 Paths to your settings
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    createNamespace: true # 👈 Tells ArgoCD to build the otel-demo namespace automatically
+

@@ -1,0 +1,27 @@
+# custom-values.yaml
+
+# 1. Scale down components for local desktop use
+global:
+  environment: "local"
+
+# 2. Reduce CPU and Memory limits for microservices so they do not overload RAM
+frontend:
+  resources:
+    limits:
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+
+checkoutservice:
+  resources:
+    limits:
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+
+# 3. Disable the automated load generator to save system processing power
+loadgenerator:
+  enabled: false
+

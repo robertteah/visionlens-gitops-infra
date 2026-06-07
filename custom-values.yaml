@@ -8,7 +8,7 @@ components:
 
   loadgenerator:
     enabled: true
-    image: "ghcr.io/open-telemetry/opentelemetry-demo/loadgenerator:1.10.0"
+    image: "ghcr.io/open-telemetry/demo:1.10.0-load-generator"
     resources:
       requests:
         cpu: 550m

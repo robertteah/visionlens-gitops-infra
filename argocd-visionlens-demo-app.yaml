@@ -7,7 +7,7 @@ spec:
   project: default
   destination:
     server: https://default.svc
-    namespace: otel-demo
+    namespace: default
   sources:
     # Source 1: Pulls the official community OpenTelemetry application chart
     - repoURL: 'https://github.io'

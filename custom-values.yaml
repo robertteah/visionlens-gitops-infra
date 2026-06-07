@@ -1,12 +1,8 @@
-# custom-values.yaml
-
 global:
-  environment: "local"
-
-# 👇 FIX: All individual microservices must live inside this components block
+  environment: local
 
 components:
-  loadgenerator:
+  load-generator:
     enabled: true
     imageOverride:
       repository: ghcr.io/open-telemetry/demo
@@ -27,11 +23,10 @@ components:
         cpu: 50m
         memory: 64Mi
 
-  checkoutservice:
+  checkout:
     resources:
       limits:
         memory: 128Mi
       requests:
         cpu: 50m
         memory: 64Mi
-

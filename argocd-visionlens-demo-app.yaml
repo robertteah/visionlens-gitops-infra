@@ -9,13 +9,14 @@ spec:
     server: https://default.svc
     namespace: default
   sources:
-    # Source 1: Pulls the official community OpenTelemetry application chart
-    - repoURL: 'https://github.io'
+    # Source 1: Pulls the official community OpenTelemetry application chart    
+    - repoURL: 'https://open-telemetry.github.io/opentelemetry-helm-charts'
       chart: opentelemetry-demo
       targetRevision: 0.40.9
     # Source 2: Pulls your custom lightweight settings from your precise GitHub repository
     - repoURL: 'https://github.com/robertteah/visionlens-gitops-infra.git'
       targetRevision: HEAD
+      ref: values
       helm:
         valueFiles:
           - '$values/apps/otel-demo/custom-values.yaml'

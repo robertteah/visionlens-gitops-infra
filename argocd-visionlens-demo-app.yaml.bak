@@ -16,7 +16,7 @@ spec:
       targetRevision: 0.40.9
       helm:
         valueFiles:
-          - $values/apps/otel-demo/custom-values.yaml
+          - $values/custom-values.yaml
 
     - repoURL: https://github.com/robertteah/visionlens-gitops-infra.git
       targetRevision: HEAD
